@@ -8,7 +8,7 @@
   ],
   "repository": {
     "type": "git",
-      "url": "git://github.com/kritzcreek/purescript-matrices.git"
+    "url": "git://github.com/kritzcreek/purescript-matrices.git"
   },
   "license": "LGPL-3.0",
   "dependencies": {
@@ -19,5 +19,6 @@
     "purescript-psci-support": "^1.0.0",
     "purescript-console": "^1.0.0",
     "purescript-spec": "^0.8.0"
-  }
+  },
+  "version": "1.0.0"
 }
