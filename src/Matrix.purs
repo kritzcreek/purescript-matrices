@@ -156,10 +156,10 @@ getColumn x m =
                         else
                           Just (Tuple ix (ix + w))) x
   in
-   if x >= 0 && x < w then
-     traverse ((values m) Array.!! _) indices
-   else
-     Nothing
+    if x >= 0 && x < w then
+      traverse ((values m) Array.!! _) indices
+    else
+      Nothing
 
 -- | Convert a `Matrix` to an indexed Array
 toIndexedArray ∷ ∀ a. Matrix a → Array {x ∷ Int, y ∷ Int, value ∷ a}
@@ -173,14 +173,14 @@ toIndexedArray m =
   in
     mapWithIndex f (values m)
 
--- | Apply a function to every element in the given Matrix taking it's indices
+-- | Apply a function to every element in the given Matrix taking its indices
 -- | into account
 indexedMap ∷ ∀ a b. (Int → Int → a → b) → Matrix a → Matrix b
 indexedMap f m =
     Matrix { size: size m
            , values: map (\ {x, y, value} → f x y value) (toIndexedArray m)
            }
-    
+
 -- | Combines two Matrices with the same dimensions by combining elements at the
 -- | same index with the given function. Returns Nothing on a dimension
 -- | mismatch.
