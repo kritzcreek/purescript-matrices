@@ -24,7 +24,7 @@ Traversable Matrix
 height :: forall a. Matrix a -> Int
 ```
 
-Returns the height of a matrix
+Returns the height of a matrix.
 
 #### `width`
 
@@ -32,7 +32,7 @@ Returns the height of a matrix
 width :: forall a. Matrix a -> Int
 ```
 
-Returns the width of a matrix
+Returns the width of a matrix.
 
 #### `repeat`
 
@@ -40,7 +40,7 @@ Returns the width of a matrix
 repeat :: forall a. Int -> Int -> a -> Matrix a
 ```
 
-Repeats the same value and creates a width × height `Matrix`
+Repeats the same value and creates a width × height `Matrix`.
 
 ```purescript
 > repeat 2 3 "X"
@@ -55,7 +55,7 @@ Repeats the same value and creates a width × height `Matrix`
 empty :: forall a. Matrix a
 ```
 
-The empty Matrix
+The empty Matrix.
 
 #### `isEmpty`
 
@@ -90,7 +90,7 @@ get :: forall a. Int -> Int -> Matrix a -> Maybe a
 ```
 
 Returns the value at column, row or `Nothing` if the index was out of
-bounds
+bounds.
 
 #### `set`
 
@@ -99,7 +99,7 @@ set :: forall a. Int -> Int -> a -> Matrix a -> Maybe (Matrix a)
 ```
 
 Sets the value at column, row or returns `Nothing` if the index was out of
-bounds
+bounds.
 
 #### `modify`
 
@@ -108,7 +108,7 @@ modify :: forall a. Int -> Int -> (a -> a) -> Matrix a -> Maybe (Matrix a)
 ```
 
 Applies the given function to the element at column, row or returns Nothing
-if the index was out of bounds
+if the index was out of bounds.
 
 #### `getRow`
 
@@ -116,11 +116,15 @@ if the index was out of bounds
 getRow :: forall a. Int -> Matrix a -> Maybe (Array a)
 ```
 
+Get the row at the given index.
+
 #### `getColumn`
 
 ``` purescript
 getColumn :: forall a. Int -> Matrix a -> Maybe (Array a)
 ```
+
+Get the column at the given index.
 
 #### `toIndexedArray`
 
@@ -128,11 +132,26 @@ getColumn :: forall a. Int -> Matrix a -> Maybe (Array a)
 toIndexedArray :: forall a. Matrix a -> Array { x :: Int, y :: Int, value :: a }
 ```
 
+Convert a `Matrix` to an indexed Array
+
 #### `indexedMap`
 
 ``` purescript
 indexedMap :: forall a b. (Int -> Int -> a -> b) -> Matrix a -> Matrix b
 ```
+
+Apply a function to every element in the given Matrix taking its indices
+into account
+
+#### `zipWith`
+
+``` purescript
+zipWith :: forall a b c. (a -> b -> c) -> Matrix a -> Matrix b -> Maybe (Matrix c)
+```
+
+Combines two Matrices with the same dimensions by combining elements at the
+same index with the given function. Returns Nothing on a dimension
+mismatch.
 
 #### `prettyPrintMatrix`
 
@@ -140,16 +159,6 @@ indexedMap :: forall a b. (Int -> Int -> a -> b) -> Matrix a -> Matrix b
 prettyPrintMatrix :: forall a. (a -> String) -> Matrix a -> String
 ```
 
-#### `ex`
-
-``` purescript
-ex :: Matrix Int
-```
-
-#### `main`
-
-``` purescript
-main :: forall t13766. Eff (console :: CONSOLE | t13766) Unit
-```
+Pretty prints a matrix using the given formatting function on every element
 
 
