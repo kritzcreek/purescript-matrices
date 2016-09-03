@@ -1,6 +1,6 @@
 purescript-matrices
 ==
-
+[![Build Status](https://travis-ci.org/kRITZCREEK/purescript-matrices.svg?branch=master)](https://travis-ci.org/kRITZCREEK/purescript-matrices)
 [![Dependency Status](https://www.versioneye.com/user/projects/57ca18f769d94900419ca37d/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57ca18f769d94900419ca37d)
 <a href="https://pursuit.purescript.org/packages/purescript-matrices">
   <img src="https://pursuit.purescript.org/packages/purescript-matrices/badge"
