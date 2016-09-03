@@ -1,8 +1,15 @@
 purescript-matrices
 ==
 
+[![Dependency Status](https://www.versioneye.com/user/projects/57ca18f769d94900419ca37d/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57ca18f769d94900419ca37d)
+<a href="https://pursuit.purescript.org/packages/purescript-matrices">
+  <img src="https://pursuit.purescript.org/packages/purescript-matrices/badge"
+       alt="purescript-matrices on Pursuit">
+  </img>
+</a>
+
 A two-dimensional Matrix type for PureScript with a simple and straightforward
-API. [Documentation is available on Pursuit]()
+API. [Documentation is available on Pursuit](https://pursuit.purescript.org/packages/purescript-matrices)
 
 
 Inspired by https://github.com/eeue56/elm-flat-matrix.
