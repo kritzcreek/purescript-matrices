@@ -1,0 +1,9 @@
+language: node_js
+sudo: false
+node_js:
+  - 6
+install:
+  - npm i purescript pulp bower -g
+  - bower i
+script:
+  - pulp build && pulp test
