@@ -114,7 +114,8 @@ fromArray vals =
 -- | bounds.
 get ∷ ∀ a. Int → Int → Matrix a → Maybe a
 get x y m
-  | x >= 0 && y >= 0 = (values m) Array.!! (y * (width m) + x)
+  | x >= 0 && y >= 0 && x < width m && y < height m =
+    (values m) Array.!! (y * (width m) + x)
   | otherwise = Nothing
 
 -- | Sets the value at column, row or returns `Nothing` if the index was out of
@@ -126,40 +127,38 @@ set x y new = modify x y (const new)
 -- | if the index was out of bounds.
 modify ∷ ∀ a. Int → Int → (a → a) → Matrix a → Maybe (Matrix a)
 modify x y new m
-  | x >= 0 && y >= 0 =
+  | x >= 0 && y >= 0 && x < width m && y < height m =
     overValues (Array.modifyAt (y * (width m) + x) new) m
   | otherwise = Nothing
 
 
 -- | Get the row at the given index.
 getRow ∷ ∀ a. Int → Matrix a → Maybe (Array a)
-getRow x m =
-  let
-    w = width m
-    start = x * w
-    end = start + w
-  in
-    if x < 0 || end > w * (height m) then
-      Nothing
-    else
-      Just (Array.slice start end (values m))
+getRow y m
+  | y < 0 || y >= height m = Nothing
+  | otherwise =
+    let
+      w = width m
+      start = y * w
+      end = start + w
+    in
+     Just (Array.slice start end (values m))
 
 -- | Get the column at the given index.
 getColumn ∷ ∀ a. Int → Matrix a → Maybe (Array a)
-getColumn x m =
-  let
-    w = width m
-    maxIndex = Array.length (values m) - 1
-    indices = unfoldr (\ix →
-                        if ix > maxIndex then
-                          Nothing
-                        else
-                          Just (Tuple ix (ix + w))) x
-  in
-    if x >= 0 && x < w then
+getColumn x m
+  | x < 0 || x >= width m = Nothing
+  | otherwise =
+    let
+      w = width m
+      maxIndex = Array.length (values m) - 1
+      indices = unfoldr (\ix →
+                          if ix > maxIndex then
+                            Nothing
+                          else
+                            Just (Tuple ix (ix + w))) x
+    in
       traverse ((values m) Array.!! _) indices
-    else
-      Nothing
 
 -- | Convert a `Matrix` to an indexed Array
 toIndexedArray ∷ ∀ a. Matrix a → Array {x ∷ Int, y ∷ Int, value ∷ a}
