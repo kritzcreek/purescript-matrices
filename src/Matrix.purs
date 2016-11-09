@@ -207,7 +207,7 @@ prettyPrintMatrix showElem m'
       Nothing → "Dimensions error"
       Just columns →
         intercalate "\n"
-        (mapMaybe (String.stripSuffix ", ")
+        (mapMaybe (String.stripSuffix (String.Pattern ", "))
          (foldr appendColumn acc columns))
       where
         appendColumn column acc =
