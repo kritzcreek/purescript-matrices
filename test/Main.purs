@@ -2,16 +2,14 @@ module Test.Main where
 
 import Prelude
 import Control.Monad.Eff (Eff)
-import Control.Monad.Eff.Console (CONSOLE)
 import Data.Maybe (fromMaybe, Maybe(Just))
 import Matrix (repeat, zipWith, height, width, empty, fromArray, get)
-import Node.Process (PROCESS)
 import Test.Spec (describe, it)
 import Test.Spec.Assertions (shouldEqual)
 import Test.Spec.Reporter.Console (consoleReporter)
-import Test.Spec.Runner (run)
+import Test.Spec.Runner (RunnerEffects, run)
 
-main ∷ ∀ e. Eff (process ∷ PROCESS , console ∷ CONSOLE | e) Unit
+main ∷ ∀ e. Eff (RunnerEffects e) Unit
 main = run [consoleReporter] do
   describe "purescript-matrices" do
     describe "Creating matrices" do
