@@ -12,12 +12,12 @@
   },
   "license": "LGPL-3.0",
   "dependencies": {
-    "purescript-arrays": "^3.0.0",
-    "purescript-strings": "^2.0.2"
+    "purescript-arrays": "^4.0.1",
+    "purescript-strings": "^3.0.0"
   },
   "devDependencies": {
-    "purescript-psci-support": "^2.0.0",
-    "purescript-spec": "^0.10.0"
+    "purescript-psci-support": "^3.0.0",
+    "purescript-spec": "^0.14.0"
   },
   "version": "1.0.0"
 }
