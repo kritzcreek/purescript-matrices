@@ -21,6 +21,7 @@ module Matrix
 import Prelude
 import Data.Array as Array
 import Data.String as String
+import Data.String.CodeUnits as StringCU
 import Data.Array (mapMaybe, mapWithIndex)
 import Data.Foldable (class Foldable, foldr, intercalate, maximum, foldMap, foldl)
 import Data.Maybe (fromMaybe, Maybe(..))
@@ -47,7 +48,7 @@ instance functorMatrix ∷ Functor Matrix where
 mapMatrix ∷ ∀ a b. (a → b) → Matrix a → Matrix b
 mapMatrix f (Matrix m) =
   Matrix m {values = map f m.values}
-  
+
 instance foldableMatrix ∷ Foldable Matrix where
   foldr f b m = foldr f b (values m)
   foldl f b m = foldl f b (values m)
@@ -221,7 +222,7 @@ prettyPrintMatrix showElem m'
 
 leftPad ∷ Int → String → String
 leftPad x s =
-  String.fromCharArray (replicate (x - (String.length s)) ' ') <> s
+  StringCU.fromCharArray (replicate (x - (String.length s)) ' ') <> s
 
 values ∷ ∀ a. Matrix a → Array a
 values (Matrix m) = m.values
