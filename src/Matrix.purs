@@ -165,11 +165,8 @@ getColumn x m
 
 -- | Get all the rows in the matrix
 rows ∷ ∀ a. Matrix a → Array (Array a)
-rows m =
-  let
-    h = height m
-    w = width m
-  in 0 # unfoldr \rowIndex -> do
+rows m = 
+  0 # unfoldr \rowIndex -> do
     row <- getRow rowIndex m
     pure (Tuple row (rowIndex + 1))
 
