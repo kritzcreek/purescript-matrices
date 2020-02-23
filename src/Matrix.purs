@@ -7,6 +7,8 @@ module Matrix
        , get
        , getRow
        , getColumn
+       , rows
+       , columns
        , prettyPrintMatrix
        , empty
        , isEmpty
@@ -160,6 +162,30 @@ getColumn x m
                             Just (Tuple ix (ix + w))) x
     in
       traverse ((values m) Array.!! _) indices
+
+-- | Get all the rows in the matrix
+rows ∷ ∀ a. Matrix a → Array (Array a)
+rows m =
+  let
+    h = height m
+    w = width m
+  in 0 # unfoldr \rowIndex -> do
+    row <- getRow rowIndex m
+    pure (Tuple row (rowIndex + 1))
+
+-- | Get all the columns in the matrix
+columns ∷ ∀ a. Matrix a → Array (Array a)
+columns m =
+  0 # unfoldr \columnIndex ->
+    let
+      oneColumn :: Array a
+      oneColumn = 0 # unfoldr \rowIndex -> do
+          el <- get columnIndex rowIndex m
+          pure (Tuple el (rowIndex + 1))
+    in
+      if Array.null oneColumn
+        then Nothing
+        else Just (Tuple oneColumn (columnIndex + 1))
 
 -- | Convert a `Matrix` to an indexed Array
 toIndexedArray ∷ ∀ a. Matrix a → Array {x ∷ Int, y ∷ Int, value ∷ a}

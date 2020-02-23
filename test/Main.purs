@@ -3,7 +3,7 @@ module Test.Main where
 import Prelude
 import Effect (Effect)
 import Data.Maybe (fromMaybe, Maybe(Just))
-import Matrix (repeat, zipWith, height, width, empty, fromArray, get)
+import Matrix (repeat, zipWith, height, width, empty, fromArray, get, rows, columns)
 import Test.Spec (describe, it)
 import Test.Spec.Assertions (shouldEqual)
 import Test.Spec.Reporter.Console (consoleReporter)
@@ -25,3 +25,7 @@ main = run [consoleReporter] do
       it "zips two matrices" do
         let m = fromMaybe empty (zipWith (+) (repeat 2 2 1) (repeat 2 2 1))
         m `shouldEqual` repeat 2 2 2
+      it "get all rows from a matrix" do
+        rows (repeat 2 3 1) `shouldEqual` [[1, 1], [1, 1], [1, 1]]
+      it "get all columns from a matrix" do
+        columns (repeat 2 3 1) `shouldEqual` [[1, 1, 1], [1, 1, 1]]
