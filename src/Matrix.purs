@@ -232,10 +232,10 @@ prettyPrintMatrix showElem m'
     in
     case columnsm of
       Nothing → "Dimensions error"
-      Just columns →
+      Just columns' →
         intercalate "\n"
         (mapMaybe (String.stripSuffix (String.Pattern ", "))
-         (foldr appendColumn acc columns))
+         (foldr appendColumn acc columns'))
       where
         appendColumn column acc =
           let
