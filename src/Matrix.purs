@@ -1,33 +1,34 @@
 module Matrix
-       ( Matrix()
-       , height
-       , width
-       , repeat
-       , fromArray
-       , get
-       , getRow
-       , getColumn
-       , rows
-       , columns
-       , prettyPrintMatrix
-       , empty
-       , isEmpty
-       , set
-       , modify
-       , toIndexedArray
-       , indexedMap
-       , zipWith
-       ) where
+  ( Matrix()
+  , height
+  , width
+  , repeat
+  , fromArray
+  , get
+  , getRow
+  , getColumn
+  , rows
+  , columns
+  , prettyPrintMatrix
+  , empty
+  , isEmpty
+  , set
+  , modify
+  , toIndexedArray
+  , indexedMap
+  , zipWith
+  ) where
 
 
 import Prelude
-import Data.Array as Array
-import Data.String as String
-import Data.String.CodeUnits as StringCU
+
 import Data.Array (mapMaybe, mapWithIndex)
+import Data.Array as Array
 import Data.Foldable (class Foldable, foldr, intercalate, maximum, foldMap, foldl)
 import Data.Maybe (fromMaybe, Maybe(..))
-import Data.Traversable (class Traversable, traverse, all, sequenceDefault)
+import Data.String as String
+import Data.String.CodeUnits as StringCU
+import Data.Traversable (class Traversable, all, sequenceDefault, traverse)
 import Data.Tuple (Tuple(Tuple))
 import Data.Unfoldable (unfoldr)
 
