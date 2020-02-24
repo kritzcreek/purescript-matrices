@@ -1,16 +1,18 @@
 module Test.Main where
 
 import Prelude
-import Effect (Effect)
+
 import Data.Maybe (fromMaybe, Maybe(Just))
+import Effect (Effect)
+import Effect.Aff (launchAff_)
 import Matrix (repeat, zipWith, height, width, empty, fromArray, get, rows, columns)
 import Test.Spec (describe, it)
 import Test.Spec.Assertions (shouldEqual)
 import Test.Spec.Reporter.Console (consoleReporter)
-import Test.Spec.Runner (run)
+import Test.Spec.Runner (runSpec)
 
 main ∷ Effect Unit
-main = run [consoleReporter] do
+main = launchAff_ $ runSpec [consoleReporter] do
   describe "purescript-matrices" do
     describe "Creating matrices" do
       it "repeat" do

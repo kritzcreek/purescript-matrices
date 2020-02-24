@@ -12,11 +12,11 @@
   },
   "license": "LGPL-3.0",
   "dependencies": {
-    "purescript-arrays": "^5.1.0",
+    "purescript-arrays": "^5.3.1",
     "purescript-strings": "^4.0.1"
   },
   "devDependencies": {
     "purescript-psci-support": "^4.0.0",
-    "purescript-spec": "^3.0.0"
+    "purescript-spec": "^4.0.1"
   }
 }
