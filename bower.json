@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git://github.com/kritzcreek/purescript-matrices.git"
   },
-  "license": "LGPL-3.0",
+  "license": "LGPL-3.0-or-later",
   "dependencies": {
     "purescript-arrays": "^5.3.1",
     "purescript-strings": "^4.0.1"
