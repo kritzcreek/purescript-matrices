@@ -7,6 +7,8 @@ module Matrix
        , get
        , getRow
        , getColumn
+       , rows
+       , columns
        , prettyPrintMatrix
        , empty
        , isEmpty
@@ -77,7 +79,7 @@ width (Matrix m) = m.size.x
 repeat ∷ ∀ a. Int → Int → a → Matrix a
 repeat x y v =
   Matrix { size: {x, y}
-         , values: replicate (x * y) v
+         , values: Array.replicate (x * y) v
          }
 
 -- | The empty Matrix.
@@ -161,6 +163,27 @@ getColumn x m
     in
       traverse ((values m) Array.!! _) indices
 
+-- | Get all the rows in the matrix
+rows ∷ ∀ a. Matrix a → Array (Array a)
+rows m =
+  0 # unfoldr \rowIndex -> do
+    row <- getRow rowIndex m
+    pure (Tuple row (rowIndex + 1))
+
+-- | Get all the columns in the matrix
+columns ∷ ∀ a. Matrix a → Array (Array a)
+columns m =
+  0 # unfoldr \columnIndex ->
+    let
+      oneColumn :: Array a
+      oneColumn = 0 # unfoldr \rowIndex -> do
+          el <- get columnIndex rowIndex m
+          pure (Tuple el (rowIndex + 1))
+    in
+      if Array.null oneColumn
+        then Nothing
+        else Just (Tuple oneColumn (columnIndex + 1))
+
 -- | Convert a `Matrix` to an indexed Array
 toIndexedArray ∷ ∀ a. Matrix a → Array {x ∷ Int, y ∷ Int, value ∷ a}
 toIndexedArray m =
@@ -202,14 +225,14 @@ prettyPrintMatrix showElem m'
       w = width m
       h = height m
       columnsm = traverse (flip getColumn m) (Array.range 0 (w - 1))
-      acc = replicate h ""
+      acc = Array.replicate h ""
     in
     case columnsm of
       Nothing → "Dimensions error"
-      Just columns →
+      Just columns' →
         intercalate "\n"
         (mapMaybe (String.stripSuffix (String.Pattern ", "))
-         (foldr appendColumn acc columns))
+         (foldr appendColumn acc columns'))
       where
         appendColumn column acc =
           let
@@ -222,15 +245,13 @@ prettyPrintMatrix showElem m'
 
 leftPad ∷ Int → String → String
 leftPad x s =
-  StringCU.fromCharArray (replicate (x - (String.length s)) ' ') <> s
+  StringCU.fromCharArray (Array.replicate (x - (String.length s)) ' ') <> s
 
 values ∷ ∀ a. Matrix a → Array a
 values (Matrix m) = m.values
 
 size ∷ ∀ a. Matrix a → {x ∷ Int, y ∷ Int}
 size (Matrix m) = m.size
-
-foreign import replicate ∷ ∀ a. Int → a → Array a
 
 overValues
   ∷ ∀ a b f. (Functor f)
