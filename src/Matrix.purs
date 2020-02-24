@@ -79,7 +79,7 @@ width (Matrix m) = m.size.x
 repeat ∷ ∀ a. Int → Int → a → Matrix a
 repeat x y v =
   Matrix { size: {x, y}
-         , values: replicate (x * y) v
+         , values: Array.replicate (x * y) v
          }
 
 -- | The empty Matrix.
@@ -165,7 +165,7 @@ getColumn x m
 
 -- | Get all the rows in the matrix
 rows ∷ ∀ a. Matrix a → Array (Array a)
-rows m = 
+rows m =
   0 # unfoldr \rowIndex -> do
     row <- getRow rowIndex m
     pure (Tuple row (rowIndex + 1))
@@ -225,7 +225,7 @@ prettyPrintMatrix showElem m'
       w = width m
       h = height m
       columnsm = traverse (flip getColumn m) (Array.range 0 (w - 1))
-      acc = replicate h ""
+      acc = Array.replicate h ""
     in
     case columnsm of
       Nothing → "Dimensions error"
@@ -245,15 +245,13 @@ prettyPrintMatrix showElem m'
 
 leftPad ∷ Int → String → String
 leftPad x s =
-  StringCU.fromCharArray (replicate (x - (String.length s)) ' ') <> s
+  StringCU.fromCharArray (Array.replicate (x - (String.length s)) ' ') <> s
 
 values ∷ ∀ a. Matrix a → Array a
 values (Matrix m) = m.values
 
 size ∷ ∀ a. Matrix a → {x ∷ Int, y ∷ Int}
 size (Matrix m) = m.size
-
-foreign import replicate ∷ ∀ a. Int → a → Array a
 
 overValues
   ∷ ∀ a b f. (Functor f)
