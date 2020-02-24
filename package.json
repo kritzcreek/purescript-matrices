@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "purescript": "^0.13"
+  },
+  "scripts": {
+    "compile": "purs compile 'src/**/*.purs' 'test/**/*.purs' 'bower_components/*/src/**/*.purs'",
+    "test": "npm run compile && node -e 'require(\"./output/Test.Main\").main()'"
+  }
+}

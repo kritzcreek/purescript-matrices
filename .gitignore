@@ -5,3 +5,4 @@
 /.psci*
 /src/.webpack.js
 .DS_Store
+/package-lock.json
